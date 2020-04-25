@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Lobster
+Author: Impallari Type
+Url: http://www.fontsquirrel.com/fonts/lobster
+
+Font: De Valencia
+Author: Manuel Fernández del Campo García
+Url: https://www.fontsquirrel.com/fonts/de-valencia
