@@ -8,7 +8,8 @@ import HomePage from "./pages/HomePage";
 
 class App extends Component {
   state = {
-    navbarType: "userPage",
+    navbarType: "homePage",
+    // navbarType: "userPage",
   };
 
   render() {

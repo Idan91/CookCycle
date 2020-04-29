@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import RecipesPage from "../pages/RecipesPage";
+import SignInPage from "../pages/SignInPage";
 
 export const AppContext = React.createContext();
 
 class AppContextProvider extends Component {
   state = {
     homePages: [
+      // {
+      //   name: "Register",
+      //   component: HomePage,
+      // },
       {
-        name: "Register",
-        component: HomePage,
-      },
-      {
-        name: "Login",
-        component: HomePage,
+        name: "Sign In",
+        component: SignInPage,
       },
     ],
     userPages: [

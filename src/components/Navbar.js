@@ -1,6 +1,8 @@
 import React from "react";
 import { AppContext } from "../context/AppContext";
 import { NavLink } from "react-router-dom";
+import logoHorizontal from "../images/Logo_Horizontal.svg";
+import logotype from "../images/LogoType.svg";
 
 const Navbar = (props) => {
   return (
@@ -30,7 +32,14 @@ const Navbar = (props) => {
           <div className="navbar">
             <div className="logo-conatainer">
               {/*Logo*/}
-              <h1 className="navbar-item navbar-logo">CookCycle</h1>
+              <NavLink to="/">
+                <img
+                  // src={logoHorizontal}
+                  // width="200px"
+                  className="navbar-item navbar-logo navbar-logo-img"
+                  // alt="CookCycle"
+                />
+              </NavLink>
             </div>
             <div className="navbar-list-container">
               <ul className="navbar-list">{drawNavbar()}</ul>
