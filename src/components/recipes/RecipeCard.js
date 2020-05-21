@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import carbonara from "../images/Spaghetti-Carbonara-6.jpg";
+import carbonara from "../../images/Spaghetti-Carbonara-6.jpg";
 
 const RecipeCard = (props) => {
   return (

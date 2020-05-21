@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { withRouter } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import googleIcon from "../images/google_G.svg";
-import logoHero from "../images/Logo_Hero.svg";
 
 const SignInPage = () => {
-  const renderSignInMethods = () => {
+  const { facebookSignIn, googleSignIn } = useContext(AuthContext);
+
+  const renderSignInMethodButtons = () => {
     return (
       <React.Fragment>
-        {/* <img src={logoHero} width="200px" alt="CookCycle" /> */}
-        <button className="btn btn-sign-in2 btn-facebook link">
+        <button
+          className="btn btn-sign-in2 btn-facebook link"
+          onClick={facebookSignIn}
+        >
           <FontAwesomeIcon icon={faFacebookF} className="facebook-icon" />
           &emsp;Sign in with Facebook
         </button>
         <br />
-        <button className="btn btn-sign-in2 btn-google link">
+        <button
+          className="btn btn-sign-in2 btn-google link"
+          onClick={googleSignIn}
+        >
           <img src={googleIcon} alt="" className="google-icon" />
           &emsp;Sign in with Google
         </button>
@@ -24,19 +32,18 @@ const SignInPage = () => {
 
   return (
     <div className="page">
-      {/* <h1 className="page-title">Sign In</h1> */}
       <br />
       <div className="content-container">
         <div className="centered-container">
-          <img src={logoHero} width="300px" className="logo" alt="CookCycle" />
+          <img className="signin-logo-img" alt="CookCycle" />
           <br />
           <br />
           <br />
-          {renderSignInMethods()}
+          {renderSignInMethodButtons()}
         </div>
       </div>
     </div>
   );
 };
 
-export default SignInPage;
+export default withRouter(SignInPage);

@@ -1,37 +1,27 @@
-import React, { Component } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
-import AppContextProvider from "./context/AppContext";
-import { AppContext } from "./context/AppContext";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
+import React from "react";
+import { HashRouter } from "react-router-dom";
+import AppContextProvider from "./contexts/AppContext";
+import AuthContextProvider from "./contexts/AuthContext";
+import ReciepsContextProvider from "./contexts/RecipesContext";
+import CookCycle from "./CookCycle";
+import UserContextProvider from "./contexts/UserContext";
 
-class App extends Component {
-  state = {
-    navbarType: "homePage",
-    // navbarType: "userPage",
-  };
-
-  render() {
-    return (
-      <React.Fragment>
-        <HashRouter basename="/">
-          <AppContextProvider>
-            <Navbar type={this.state.navbarType} />
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <AppContext.Consumer>
-                {(appContext) => {
-                  return appContext.populateRoutes(this.state.navbarType);
-                }}
-              </AppContext.Consumer>
-            </Switch>
-            <Footer />
-          </AppContextProvider>
-        </HashRouter>
-      </React.Fragment>
-    );
-  }
-}
+const App = () => {
+  return (
+    <HashRouter basename="/">
+      <AppContextProvider>
+        <AuthContextProvider>
+          <UserContextProvider>
+            <ReciepsContextProvider>
+              <React.Fragment>
+                <CookCycle />
+              </React.Fragment>
+            </ReciepsContextProvider>
+          </UserContextProvider>
+        </AuthContextProvider>
+      </AppContextProvider>
+    </HashRouter>
+  );
+};
 
 export default App;
