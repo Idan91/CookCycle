@@ -18,7 +18,7 @@ const IngredientSearch = () => {
         <input
           type="text"
           id="search-ingredient"
-          placeholder="Search ingredient..."
+          placeholder="Search ingredients..."
           autoComplete="off"
           value={ingredientSearchInput}
           onChange={handleInputChange}

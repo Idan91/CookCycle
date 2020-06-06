@@ -246,10 +246,12 @@ svg:hover {
 }
 
 .grid-item {
-  display: inline-block;
-  margin: 0;
+  position: relative;
+  /* display: inline-block; */
+  margin: 10px 0px;
   padding: 5px 25px;
   text-align: center;
+  height: max-content;
   /* background-color: gray; */
 }
 
@@ -391,8 +393,8 @@ svg:hover {
 } */
 
 .ingerdients {
-  height: 21vh;
-  z-index: 5;
+  min-height: 20vh;
+  height: max-content;
   /* margin-bottom: 10px; */
 }
 
@@ -401,6 +403,7 @@ svg:hover {
   /* background-color: var(--secondary-orange); */
   /* border-radius: 20px; */
   margin-top: 0px;
+  /* min-height: 10vh; */
   height: 100%;
   /* border-bottom: 1px solid var(--h2-color); */
 }
@@ -411,9 +414,19 @@ svg:hover {
 }
 
 .ingredient-container ul {
+  position: relative;
   list-style-type: none;
   margin: 0;
+  margin-top: 15px;
   padding: 0;
+  height: max-content;
+  /* background-color: red; */
+}
+
+.selected-ingredients {
+  z-index: 1;
+  height: auto;
+  min-height: 4vh;
 }
 
 .selected-ingredients li {
@@ -421,7 +434,7 @@ svg:hover {
 }
 
 .ingredient {
-  margin: 3px 10px;
+  margin: 5px 8px;
   display: inline-block;
   color: white;
   background-color: var(--secondary-orange);
@@ -437,7 +450,8 @@ svg:hover {
 }
 
 .ingredient:hover {
-  background-color: var(--main-green);
+  /* background-color: var(--main-green); */
+  background-color: rgb(152, 14, 14);
   border-radius: var(--hover-border-radius);
   transform: scale(1.1);
 }
@@ -450,6 +464,7 @@ svg:hover {
   transform: translateX(-50%);
   margin: 15px 0px 20px 0px;
   background-color: var(--main-beige);
+  z-index: 7;
 }
 
 .search-label {
@@ -528,7 +543,6 @@ svg:hover {
 }
 
 .suggestion {
-  z-index: 4;
   position: relative;
   transition: all 0.3s;
   width: 100%;
@@ -561,11 +575,13 @@ svg:hover {
   font-size: 16px;
   font-weight: bold;
   background-color: var(--main-orange);
+  color: white;
   border: none;
-  padding: 3px 15px;
+  padding: 6px 18px;
   border-radius: 20px;
   text-align: center;
   transition: all 0.3s;
+  outline: none;
 }
 
 .btn:hover {
@@ -574,6 +590,10 @@ svg:hover {
   /* background-color: rgb(255, 159, 75); */
   background-color: var(--logo-orange);
   box-shadow: none;
+}
+
+.btn-recipe-search {
+  background-color: var(--main-green);
 }
 
 .btn-signup {
@@ -877,6 +897,60 @@ svg:hover {
   top: 100%;
   color: var(--logo-green);
   text-decoration: underline;
+}
+
+.profile-pic {
+  border-radius: 30px;
+  border: 1px solid var(--main-beige);
+  box-shadow: 0 25px 30px rgba(6, 31, 5, 0.2);
+}
+
+.profile-fields {
+  position: relative;
+  /* width: 80%; */
+  /* background-color: yellow; */
+  text-align: center;
+  list-style: none;
+  padding: 0;
+  /* margin: 0; */
+  /* align-items: center; */
+}
+
+.profile-fields li {
+  list-style: none;
+  display: inline-block;
+  margin: 0px 30px 10px 30px;
+  min-width: 150px;
+  width: auto;
+  transition: all var(--transition-speed);
+}
+
+.profile-fields li:hover {
+  border-radius: 20px;
+  color: white;
+  background-color: var(--main-orange);
+  cursor: pointer;
+  border-bottom: 3px solid var(--main-orange);
+}
+
+.profile-field-value {
+  font-weight: bolder;
+  -webkit-text-stroke: 1px;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.profile-field-name {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.active-profile-field {
+  color: var(--main-orange);
+  border-bottom: 3px solid var(--main-orange);
 }
 
 /* BACK TO TOP */

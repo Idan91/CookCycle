@@ -17,9 +17,14 @@ const AuthContextProvider = (props) => {
     });
   });
 
-  // userEffect(()=>{
-  //   const token
-  // })
+  const validateSignIn = () => {
+    const loggedIn =
+      currentUser ||
+      localStorage.getItem("currentUser") ||
+      localStorage.getItem("firebaseIdToken");
+
+    return loggedIn !== null && loggedIn !== "null";
+  };
 
   const facebookSignIn = () => {
     let facebookProvider = new firebase.auth.FacebookAuthProvider();
@@ -85,13 +90,12 @@ const AuthContextProvider = (props) => {
         // Sign-out successful.
         setFirebaseIdToken(null);
         setCurrentUser(null);
-        updateLocalStorageUserData(currentUser, firebaseIdToken);
+        updateLocalStorageUserData(null, null);
         window.alert("Sign out successful!");
-        // return true;
       })
       .catch(function (error) {
         // An error happened.
-        // window.alert(error.message);
+        console.error(error);
       });
   };
 
@@ -108,6 +112,7 @@ const AuthContextProvider = (props) => {
         googleSignIn,
         currentUser,
         signOut,
+        validateSignIn,
       }}
     >
       {props.children}

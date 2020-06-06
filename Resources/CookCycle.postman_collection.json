@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "7bc8f97c-0854-47dd-9438-e3d1b6466741",
+		"name": "CookCycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add favorite",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"username\" : \"tamir4@test.com\",\n   \"recipeId\" : \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/favorite/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"favorite",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete favorite",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\" : \"tamir@test.com\",\n\t\"recipeId\" : 30\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/favorite/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"favorite",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all ingredients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/ingredient/getall",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ingredient",
+						"getall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add ingredient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\" : \"some new ingredient\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/ingredient/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ingredient",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get recipe by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/recipe/getbyid/12587",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipe",
+						"getbyid",
+						"12587"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get available recipes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t\"pasta\",\n\t\"tomatoes\",\n\t\"corn\",\n\t\"sugar\",\n\t\"spinach\",\n\t\"salt\",\n\t\"pepper\",\n\t\"olive oil\",\n\t\"oil\",\n\t\"butter\",\n\t\"watermelon\"\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/recipe/getavailablerecipes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"recipe",
+						"getavailablerecipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"username\" : \"tamir@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"add"
+					]
+				},
+				"description": "add user"
+			},
+			"response": []
+		},
+		{
+			"name": "get favorites by username",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"username\" : \"tamir@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/getfavoritesbyusername",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"getfavoritesbyusername"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

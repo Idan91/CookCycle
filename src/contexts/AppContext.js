@@ -15,26 +15,31 @@ class AppContextProvider extends Component {
   state = {
     homePages: [
       {
+        name: "Home",
+        component: HomePage,
+        type: "auth",
+      },
+      {
         name: "Sign In",
         component: SignInPage,
+        type: "auth",
       },
     ],
     userPages: [
       {
         name: "My CookCycle",
         component: UserPage,
+        type: "private",
       },
       {
         name: "Recipes",
         component: RecipesPage,
-      },
-      {
-        name: "Preferences",
-        component: PreferencesPage,
+        type: "private",
       },
       {
         name: "Account",
         component: AccountPage,
+        type: "private",
       },
     ],
     navbarTypes: ["homePage", "userPage"],
@@ -59,7 +64,11 @@ class AppContextProvider extends Component {
   }
 
   createRouteFromPageName = (pageName) => {
-    return `/${pageName.replace(/\s+/g, "-").toLowerCase()}`;
+    if (pageName === "Home") {
+      return "/";
+    } else {
+      return `/${pageName.replace(/\s+/g, "-").toLowerCase()}`;
+    }
   };
 
   // populateRoutes = (navbarType) => {
@@ -73,21 +82,22 @@ class AppContextProvider extends Component {
       pages.forEach((page, index) => {
         const routePath = this.createRouteFromPageName(page.name);
 
-        if (page.name === "Sign In") {
+        if (page.type === "auth") {
           routes.push(
             <AuthRoute
-              key={index}
+              key={page.name}
               path={routePath}
               component={page.component}
             />
           );
-        } else {
+        } else if (page.type === "private") {
           routes.push(
             <PrivateRoute
-              key={index}
+              key={page.name}
               path={routePath}
               component={page.component}
             />
+            // <Route key={index} path={routePath} component={page.component} />
           );
         }
       });
@@ -100,28 +110,9 @@ class AppContextProvider extends Component {
   };
 
   renderRouterSwitch = (type) => {
-    // const { navbarTypes } = this.state;
-    // let navbarType = type === "home" ? navbarTypes[0] : navbarTypes[1];
-
-    // if (type === "user") {
-    //   return (
-    //     <React.Fragment>
-    //       <Switch>{this.populateRoutes(navbarType)}</Switch>
-    //     </React.Fragment>
-    //   );
-    // } else if (type === "home") {
-    //   return (
-    //     <React.Fragment>
-    //       <Switch>
-    //         <Route exact path="/" component={HomePage} />
-    //         {this.populateRoutes(navbarType)}
-    //       </Switch>
-    //     </React.Fragment>
-    //   );
-    // }
     return (
       <React.Fragment>
-        <Route exact path="/" component={HomePage} />
+        {/* <Route exact path="/" component={HomePage} /> */}
         {this.populateRoutes()}
       </React.Fragment>
     );

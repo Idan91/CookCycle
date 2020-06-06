@@ -15,8 +15,6 @@ class ReciepsContextProvider extends Component {
   addIngredient = (ingredient) => {
     let { selectedIngredients } = this.state;
 
-    console.log(ingredient);
-
     selectedIngredients.push(ingredient);
 
     this.setState({
@@ -78,35 +76,47 @@ class ReciepsContextProvider extends Component {
   };
 
   populateSuggestions = () => {
-    const { ingredientSuggestions, cursor } = this.state;
+    const { ingredientSuggestions, cursor, selectedIngredients } = this.state;
 
     let suggestions = [];
 
+    let ingredientCount = 0;
     ingredientSuggestions.forEach((suggestion, index) => {
-      if (index < this.state.autocompleteResultLimit) {
-        suggestions.push(
-          <li
-            className={`suggestion ${
-              cursor === index ? "suggetion-active" : ""
-            }`}
-            key={index}
-            value={suggestion}
-            onClick={this.selectSuggestion}
-            onMouseOver={(event) => {
-              event.target.classList.add("suggetion-active");
-              if (cursor > -1) {
-                this.setState({
-                  cursor: -1,
-                });
-              }
-            }}
-            onMouseLeave={(event) => {
-              event.target.classList.remove("suggetion-active");
-            }}
-          >
-            {suggestion}
-          </li>
-        );
+      if (ingredientCount < this.state.autocompleteResultLimit) {
+        let selected = false;
+        for (let i = 0; i < selectedIngredients.length; i++) {
+          if (selectedIngredients[i] === suggestion) {
+            selected = true;
+            break;
+          }
+        }
+
+        if (!selected) {
+          suggestions.push(
+            <li
+              className={`suggestion ${
+                cursor === index ? "suggetion-active" : ""
+              }`}
+              key={index}
+              value={suggestion}
+              onClick={this.selectSuggestion}
+              onMouseOver={(event) => {
+                event.target.classList.add("suggetion-active");
+                if (cursor > -1) {
+                  this.setState({
+                    cursor: -1,
+                  });
+                }
+              }}
+              onMouseLeave={(event) => {
+                event.target.classList.remove("suggetion-active");
+              }}
+            >
+              {suggestion}
+            </li>
+          );
+          ingredientCount++;
+        }
       }
     });
 
@@ -193,8 +203,6 @@ class ReciepsContextProvider extends Component {
   };
 
   mouseClickSuggestionSelection = (event) => {
-    console.log(event.target);
-
     const ingredient = event.target.getAttribute("value");
 
     try {
