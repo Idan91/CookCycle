@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import SignInPage from "../pages/SignInPage";
 import RecipesPage from "../pages/RecipesPage";
 import AccountPage from "../pages/AccountPage";
 import AuthRoute from "../components/AuthRoute";
 import UserPage from "../pages/UserPage";
-import PreferencesPage from "../pages/PreferencesPage";
 import PrivateRoute from "../components/PrivateRoute";
 
 export const AppContext = React.createContext();
@@ -14,11 +12,11 @@ export const AppContext = React.createContext();
 class AppContextProvider extends Component {
   state = {
     homePages: [
-      {
-        name: "Home",
-        component: HomePage,
-        type: "auth",
-      },
+      // {
+      //   name: "Home",
+      //   component: HomePage,
+      //   type: "auth",
+      // },
       {
         name: "Sign In",
         component: SignInPage,
@@ -97,7 +95,6 @@ class AppContextProvider extends Component {
               path={routePath}
               component={page.component}
             />
-            // <Route key={index} path={routePath} component={page.component} />
           );
         }
       });
@@ -112,7 +109,7 @@ class AppContextProvider extends Component {
   renderRouterSwitch = (type) => {
     return (
       <React.Fragment>
-        {/* <Route exact path="/" component={HomePage} /> */}
+        <AuthRoute exact path="/" component={HomePage} />
         {this.populateRoutes()}
       </React.Fragment>
     );

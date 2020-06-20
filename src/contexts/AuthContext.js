@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase";
 import { app } from "../util/firebase";
 import Axios from "../util/axios";
+import { cookcycleApiCall } from "../util/fetch";
 
 export const AuthContext = React.createContext();
 
@@ -21,6 +22,7 @@ const AuthContextProvider = (props) => {
     const loggedIn =
       currentUser ||
       localStorage.getItem("currentUser") ||
+      firebaseIdToken ||
       localStorage.getItem("firebaseIdToken");
 
     return loggedIn !== null && loggedIn !== "null";
@@ -65,6 +67,22 @@ const AuthContextProvider = (props) => {
           .catch((err) => {
             console.error(err);
           });
+
+        if (userCredentials.email) {
+          const requestBody = {
+            username: userCredentials.email,
+          };
+
+          cookcycleApiCall("post", "user/add", requestBody)
+            .then((response) => {
+              if (response.data) {
+                // console.log(response.data);
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
       })
       .catch(function (error) {
         // Handle Errors here.

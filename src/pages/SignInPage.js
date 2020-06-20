@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import googleIcon from "../images/google_G.svg";
+import Page from "./Page";
 
 const SignInPage = () => {
   const { facebookSignIn, googleSignIn } = useContext(AuthContext);
@@ -31,18 +32,29 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="page">
-      <br />
-      <div className="content-container">
-        <div className="centered-container">
-          <img className="signin-logo-img" alt="CookCycle" />
-          <br />
-          <br />
-          <br />
-          {renderSignInMethodButtons()}
-        </div>
+    // <div className="page">
+    //   <br />
+    //   <div className="content-container">
+    //     <div className="centered-container">
+    //       <div className="signin-logo-img">
+    //         <img className="" alt="CookCycle" />
+    //       </div>
+    //       <br />
+    //       <br />
+    //       <br />
+    //       {renderSignInMethodButtons()}
+    //     </div>
+    //   </div>
+    // </div>
+    <Page>
+      <div className="signin-logo-img">
+        <img className="" alt="CookCycle" />
       </div>
-    </div>
+      <br />
+      <br />
+      <br />
+      {renderSignInMethodButtons()}
+    </Page>
   );
 };
 

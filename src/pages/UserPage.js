@@ -1,22 +1,27 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { UserContext } from "../contexts/UserContext";
+import { RecipesContext } from "../contexts/RecipesContext";
+import Page from "./Page";
+import RecipeFocus from "../components/recipes/RecipeFocus";
+import { loader } from "../util/uiUtils";
 
 const UserPage = () => {
   const { currentUser } = useContext(AuthContext);
-  const { userData, profileFields, selectProfileField } = useContext(
-    UserContext
-  );
+  const { drawSearchedRecipes } = useContext(RecipesContext);
+  const {
+    profileFields,
+    selectProfileField,
+    savedRecipes,
+    showRecipeFocus,
+    hideRecipeFocus,
+    recipeFocusVisible,
+    selectedRecipe,
+    setSelectedRecipe,
+    loading,
+  } = useContext(UserContext);
 
-  const numOfRecipes = () => {
-    let num = 0;
-
-    if (userData) {
-      num = userData.recipes.arrayValue.values.length;
-    }
-
-    return num === 0 ? "no" : num;
-  };
+  // const [savedRecipeCards, setSavedRecipeCards] = useState([]);
 
   const displayName = currentUser ? currentUser.displayName : "";
   const photoURL = currentUser ? currentUser.photoURL : "";
@@ -60,11 +65,17 @@ const UserPage = () => {
     return <ul className="profile-fields">{profileFieldElements}</ul>;
   };
 
-  const savedRecipesContent = (
-    <React.Fragment>
-      <h4>You have {numOfRecipes()} saved recipes</h4>
-    </React.Fragment>
-  );
+  const savedRecipesContent = () => {
+    let content = "";
+
+    content = drawSearchedRecipes(
+      savedRecipes,
+      showRecipeFocus,
+      setSelectedRecipe,
+      "UserPage"
+    );
+    return <React.Fragment>{content}</React.Fragment>;
+  };
 
   const renderProfileContent = () => {
     let activeField = "";
@@ -80,7 +91,7 @@ const UserPage = () => {
 
     switch (activeField) {
       case "Saved Recipes": {
-        content = savedRecipesContent;
+        content = savedRecipesContent();
         break;
       }
       default: {
@@ -92,23 +103,38 @@ const UserPage = () => {
   };
 
   return (
-    <div className="page">
-      <div className="content-container">
-        <div className="centered-container">
-          <img
+    <Page>
+      {recipeFocusVisible ? (
+        <RecipeFocus recipe={selectedRecipe} hideHandler={hideRecipeFocus} />
+      ) : (
+        <React.Fragment>
+          {/* <img
             src={photoURL}
             alt="profile pic"
             width="125px"
             className="profile-pic"
           />
-          <h1>{`${displayName}`}</h1>
-          <div className="user-profile-bar">{populateProfileFields()}</div>
-          {/* <h3>You have {numOfRecipes()} saved recipes</h3> */}
-          {/* <div className="profile-content">{saveRecipesContent}</div> */}
-          {renderProfileContent()}
-        </div>
-      </div>
-    </div>
+          <br />
+          <h2>{`${displayName}`}</h2> */}
+          {loading ? (
+            loader
+          ) : (
+            <React.Fragment>
+              <img
+                src={photoURL}
+                alt="profile pic"
+                width="125px"
+                className="profile-pic"
+              />
+              <br />
+              <h2>{`${displayName}`}</h2>
+              <div className="user-profile-bar">{populateProfileFields()}</div>
+              {renderProfileContent()}
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      )}
+    </Page>
   );
 };
 

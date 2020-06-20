@@ -1,3 +1,13 @@
 /node_modules
 
 .env
+node_modules/http-proxy/package.json
+node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js
+node_modules/http-proxy/CHANGELOG.md
+node_modules/follow-redirects/package.json
+node_modules/follow-redirects/index.js
+node_modules/eventemitter3/umd/eventemitter3.min.js.map
+node_modules/eventemitter3/umd/eventemitter3.min.js
+node_modules/eventemitter3/README.md
+node_modules/eventemitter3/package.json
+node_modules/eventemitter3/index.d.ts

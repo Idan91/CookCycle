@@ -11,7 +11,10 @@ const {
   // login,
   registerUserCredentials,
   getUserData,
-  updateRecipes,
+  // updateRecipes,
+  deleteAccount,
+  // sendPasswordResetEmail,
+  // updatePassword,
 } = require("./handlers/users");
 
 const { getAllRecipes } = require("./handlers/recipes");
@@ -20,7 +23,10 @@ const { getAllRecipes } = require("./handlers/recipes");
 // app.post("/login", login);
 app.post("/register-user", registerUserCredentials);
 app.post("/user/data", getUserData);
-app.post("/user/update-recipes", updateRecipes);
+// app.post("/user/update-recipes", updateRecipes);
+// app.post("/user/reset-password", sendPasswordResetEmail);
+// app.post("/user/update-password", firebaseAuth, updatePassword);
+app.post("/user/delete", firebaseAuth, deleteAccount);
 app.get("/recipes", getAllRecipes);
 // app.get("/user", firebaseAuth, getAuthenticatedUser);
 // app.post("/user/data", firebaseAuth, getUserData);

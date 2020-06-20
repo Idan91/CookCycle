@@ -5,7 +5,7 @@ import {
   faUtensils,
   faHeart,
   faShareSquare,
-  faAngleDoubleDown,
+  // faAngleDoubleDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const HomePage = () => {
