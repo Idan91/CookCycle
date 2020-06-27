@@ -3,7 +3,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { UserContext } from "../contexts/UserContext";
 import { RecipesContext } from "../contexts/RecipesContext";
 import Page from "./Page";
-import RecipeFocus from "../components/recipes/RecipeFocus";
 import { loader } from "../util/uiUtils";
 
 const UserPage = () => {
@@ -13,15 +12,8 @@ const UserPage = () => {
     profileFields,
     selectProfileField,
     savedRecipes,
-    showRecipeFocus,
-    hideRecipeFocus,
-    recipeFocusVisible,
-    selectedRecipe,
-    setSelectedRecipe,
     loading,
   } = useContext(UserContext);
-
-  // const [savedRecipeCards, setSavedRecipeCards] = useState([]);
 
   const displayName = currentUser ? currentUser.displayName : "";
   const photoURL = currentUser ? currentUser.photoURL : "";
@@ -68,12 +60,7 @@ const UserPage = () => {
   const savedRecipesContent = () => {
     let content = "";
 
-    content = drawSearchedRecipes(
-      savedRecipes,
-      showRecipeFocus,
-      setSelectedRecipe,
-      "UserPage"
-    );
+    content = drawSearchedRecipes(savedRecipes, "UserPage");
     return <React.Fragment>{content}</React.Fragment>;
   };
 
@@ -104,36 +91,24 @@ const UserPage = () => {
 
   return (
     <Page>
-      {recipeFocusVisible ? (
-        <RecipeFocus recipe={selectedRecipe} hideHandler={hideRecipeFocus} />
-      ) : (
-        <React.Fragment>
-          {/* <img
-            src={photoURL}
-            alt="profile pic"
-            width="125px"
-            className="profile-pic"
-          />
-          <br />
-          <h2>{`${displayName}`}</h2> */}
-          {loading ? (
-            loader
-          ) : (
-            <React.Fragment>
-              <img
-                src={photoURL}
-                alt="profile pic"
-                width="125px"
-                className="profile-pic"
-              />
-              <br />
-              <h2>{`${displayName}`}</h2>
-              <div className="user-profile-bar">{populateProfileFields()}</div>
-              {renderProfileContent()}
-            </React.Fragment>
-          )}
-        </React.Fragment>
-      )}
+      <React.Fragment>
+        {loading ? (
+          loader
+        ) : (
+          <React.Fragment>
+            <img
+              src={photoURL}
+              alt="profile pic"
+              width="125px"
+              className="profile-pic"
+            />
+            <br />
+            <h2>{`${displayName}`}</h2>
+            <div className="user-profile-bar">{populateProfileFields()}</div>
+            {renderProfileContent()}
+          </React.Fragment>
+        )}
+      </React.Fragment>
     </Page>
   );
 };

@@ -5,7 +5,6 @@ import AuthContextProvider from "./contexts/AuthContext";
 import ReciepsContextProvider from "./contexts/RecipesContext";
 import CookCycle from "./CookCycle";
 import UserContextProvider from "./contexts/UserContext";
-import AccountContextProvider from "./contexts/AccountContext";
 
 const App = () => {
   return (
@@ -13,13 +12,11 @@ const App = () => {
       <AppContextProvider>
         <AuthContextProvider>
           <UserContextProvider>
-            <AccountContextProvider>
-              <ReciepsContextProvider>
-                <React.Fragment>
-                  <CookCycle />
-                </React.Fragment>
-              </ReciepsContextProvider>
-            </AccountContextProvider>
+            <ReciepsContextProvider>
+              <React.Fragment>
+                <CookCycle />
+              </React.Fragment>
+            </ReciepsContextProvider>
           </UserContextProvider>
         </AuthContextProvider>
       </AppContextProvider>

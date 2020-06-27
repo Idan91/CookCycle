@@ -13,7 +13,7 @@ const SignInPage = () => {
     return (
       <React.Fragment>
         <button
-          className="btn btn-sign-in2 btn-facebook link"
+          className="btn btn-sign-in btn-facebook link"
           onClick={facebookSignIn}
         >
           <FontAwesomeIcon icon={faFacebookF} className="facebook-icon" />
@@ -21,7 +21,7 @@ const SignInPage = () => {
         </button>
         <br />
         <button
-          className="btn btn-sign-in2 btn-google link"
+          className="btn btn-sign-in btn-google link"
           onClick={googleSignIn}
         >
           <img src={googleIcon} alt="" className="google-icon" />
@@ -32,26 +32,10 @@ const SignInPage = () => {
   };
 
   return (
-    // <div className="page">
-    //   <br />
-    //   <div className="content-container">
-    //     <div className="centered-container">
-    //       <div className="signin-logo-img">
-    //         <img className="" alt="CookCycle" />
-    //       </div>
-    //       <br />
-    //       <br />
-    //       <br />
-    //       {renderSignInMethodButtons()}
-    //     </div>
-    //   </div>
-    // </div>
     <Page>
       <div className="signin-logo-img">
         <img className="" alt="CookCycle" />
       </div>
-      <br />
-      <br />
       <br />
       {renderSignInMethodButtons()}
     </Page>

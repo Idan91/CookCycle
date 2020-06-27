@@ -3,7 +3,6 @@ import { AppContext } from "./contexts/AppContext";
 import { AuthContext } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { Switch } from "react-router-dom";
 
 const CookCycle = (props) => {
   const { renderRouterSwitch, navbarTypes } = useContext(AppContext);
@@ -16,7 +15,7 @@ const CookCycle = (props) => {
   return (
     <React.Fragment>
       <Navbar type={navbarType} />
-      <Switch>{renderRouterSwitch()}</Switch>
+      {renderRouterSwitch()}
       <Footer />
     </React.Fragment>
   );

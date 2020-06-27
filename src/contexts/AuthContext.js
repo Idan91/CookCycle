@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { app } from "../util/firebase";
 import Axios from "../util/axios";
 import { cookcycleApiCall } from "../util/fetch";
@@ -76,7 +76,6 @@ const AuthContextProvider = (props) => {
           cookcycleApiCall("post", "user/add", requestBody)
             .then((response) => {
               if (response.data) {
-                // console.log(response.data);
               }
             })
             .catch((err) => {
@@ -109,7 +108,7 @@ const AuthContextProvider = (props) => {
         setFirebaseIdToken(null);
         setCurrentUser(null);
         updateLocalStorageUserData(null, null);
-        window.alert("Sign out successful!");
+        // window.alert("Sign out successful!");
       })
       .catch(function (error) {
         // An error happened.

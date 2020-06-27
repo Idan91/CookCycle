@@ -6,17 +6,15 @@ import AccountPage from "../pages/AccountPage";
 import AuthRoute from "../components/AuthRoute";
 import UserPage from "../pages/UserPage";
 import PrivateRoute from "../components/PrivateRoute";
+import RecipeDetails from "../pages/RecipeDetails";
+import Error404Page from "../pages/Error404Page";
+import { Route, Switch } from "react-router-dom";
 
 export const AppContext = React.createContext();
 
 class AppContextProvider extends Component {
   state = {
     homePages: [
-      // {
-      //   name: "Home",
-      //   component: HomePage,
-      //   type: "auth",
-      // },
       {
         name: "Sign In",
         component: SignInPage,
@@ -69,11 +67,7 @@ class AppContextProvider extends Component {
     }
   };
 
-  // populateRoutes = (navbarType) => {
   populateRoutes = () => {
-    // const stateProperty = `${navbarType}s`;
-    // const navbarPages = this.state[stateProperty];
-
     let routes = [];
 
     const addRoutesToArray = (pages) => {
@@ -84,6 +78,7 @@ class AppContextProvider extends Component {
           routes.push(
             <AuthRoute
               key={page.name}
+              exact
               path={routePath}
               component={page.component}
             />
@@ -92,6 +87,7 @@ class AppContextProvider extends Component {
           routes.push(
             <PrivateRoute
               key={page.name}
+              exact
               path={routePath}
               component={page.component}
             />
@@ -106,12 +102,14 @@ class AppContextProvider extends Component {
     return routes;
   };
 
-  renderRouterSwitch = (type) => {
+  renderRouterSwitch = () => {
     return (
-      <React.Fragment>
+      <Switch>
         <AuthRoute exact path="/" component={HomePage} />
         {this.populateRoutes()}
-      </React.Fragment>
+        <PrivateRoute exact path="/recipe/:id" component={RecipeDetails} />
+        <Route component={Error404Page} />
+      </Switch>
     );
   };
 

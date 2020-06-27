@@ -9,10 +9,8 @@ const UserContextProvider = (props) => {
   const { isSignedIn, currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [recipeFocusVisible, setRecipeFocusVisible] = useState(false);
 
   const [recipesUpdated, setRecipesUpdated] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState({});
   const [savedRecipes, setSavedRecipes] = useState([]);
 
   const [profileFields, setProfileFields] = useState([
@@ -21,20 +19,7 @@ const UserContextProvider = (props) => {
       value: savedRecipes.length,
       active: true,
     },
-    // {
-    //   name: "Allergies",
-    //   value: [],
-    //   active: false,
-    // },
   ]);
-
-  const showRecipeFocus = () => {
-    setRecipeFocusVisible(true);
-  };
-
-  const hideRecipeFocus = () => {
-    setRecipeFocusVisible(false);
-  };
 
   const selectProfileField = (event) => {
     let { target } = event;
@@ -53,35 +38,32 @@ const UserContextProvider = (props) => {
       return field;
     });
 
-    // console.log(updatedProfileFields);
-
     setProfileFields(updatedProfileFields);
   };
 
-  const updateSavedRecipeField = (recipeCount) => {
-    let currentProfileFields = [];
-
-    profileFields.forEach((field) => {
-      let newValue = field.value;
-
-      if (field.name === "Saved Recipes") {
-        newValue = recipeCount;
-      }
-
-      let newField = {
-        name: field.name,
-        value: newValue,
-        active: field.active,
-      };
-
-      currentProfileFields.push(newField);
-    });
-
-    setProfileFields(currentProfileFields);
-  };
-
   useEffect(() => {
-    // console.log(currentUser);
+    const updateSavedRecipeField = (recipeCount) => {
+      let currentProfileFields = [];
+
+      profileFields.forEach((field) => {
+        let newValue = field.value;
+
+        if (field.name === "Saved Recipes") {
+          newValue = recipeCount;
+        }
+
+        let newField = {
+          name: field.name,
+          value: newValue,
+          active: field.active,
+        };
+
+        currentProfileFields.push(newField);
+      });
+
+      setProfileFields(currentProfileFields);
+    };
+
     setLoading(true);
 
     if (currentUser || isSignedIn) {
@@ -151,13 +133,8 @@ const UserContextProvider = (props) => {
         profileFields,
         selectProfileField,
         savedRecipes,
-        showRecipeFocus,
-        hideRecipeFocus,
-        recipeFocusVisible,
-        selectedRecipe,
-        setSelectedRecipe,
-        setRecipesUpdated,
         loading,
+        setRecipesUpdated,
       }}
     >
       {props.children}

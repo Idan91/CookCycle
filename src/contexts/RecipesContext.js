@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { cookcycleApiCall } from "../util/fetch";
-import RecipeCard from "../components/recipes/RecipeCard";
 import { UserContext } from "../contexts/UserContext";
-import RecipeFocus from "../components/recipes/RecipeFocus";
 import PrivateRoute from "../components/PrivateRoute";
+import RecipeCard from "../components/recipes/RecipeCard";
+import RecipeDetails from "../pages/RecipeDetails";
 
 export const RecipesContext = React.createContext();
 
@@ -267,12 +267,7 @@ class ReciepsContextProvider extends Component {
     }
   };
 
-  selectRecipe = (
-    event,
-    recipeListSource,
-    showFocusMethod,
-    selectionSetter
-  ) => {
+  onRecipeSelection = (event) => {
     let { target } = event;
 
     try {
@@ -282,41 +277,9 @@ class ReciepsContextProvider extends Component {
       ) {
         target = target.parentNode;
       }
-
-      if (target.classList.value !== "save-recipe") {
-        const selectedRecipeId = parseInt(target.getAttribute("recipeid"));
-
-        // const { recipeSearchResults } = this.state;
-
-        for (let i = 0; i < recipeListSource.length; i++) {
-          if (recipeListSource[i].recipeId === selectedRecipeId) {
-            selectionSetter(recipeListSource[i]);
-            showFocusMethod();
-            break;
-          }
-        }
-      }
     } catch (err) {
       console.error(err);
     }
-  };
-
-  setSelectedRecipe = (selectedRecipe) => {
-    this.setState({
-      selectedRecipe,
-    });
-  };
-
-  showRecipeFocus = () => {
-    this.setState({
-      recipeFocusVisible: true,
-    });
-  };
-
-  hideRecipeFocus = () => {
-    this.setState({
-      recipeFocusVisible: false,
-    });
   };
 
   addRecipeToFavorites = async (recipeId, userEmail) => {
@@ -326,7 +289,6 @@ class ReciepsContextProvider extends Component {
       try {
         cookcycleApiCall("post", "favorite/add", requestData)
           .then((result) => {
-            console.log(result);
             this.context.setRecipesUpdated(true);
             resolve(result);
           })
@@ -362,12 +324,7 @@ class ReciepsContextProvider extends Component {
     });
   };
 
-  drawSearchedRecipes = (
-    recipeList,
-    selectCallbackMethod,
-    selectionSetMethod,
-    page = ""
-  ) => {
+  drawSearchedRecipes = (recipeList, page = "") => {
     const { savedRecipes } = this.context;
 
     const recipes = recipeList.map((recipe, index) => {
@@ -380,16 +337,7 @@ class ReciepsContextProvider extends Component {
       });
 
       return (
-        <RecipeCard
-          key={index}
-          recipe={recipe}
-          handleClick={this.selectRecipe}
-          selectionSetter={selectionSetMethod}
-          saved={isSaved}
-          selectCallback={selectCallbackMethod}
-          recipeList={recipeList}
-          page={page}
-        />
+        <RecipeCard key={index} recipe={recipe} saved={isSaved} page={page} />
       );
     });
 
@@ -458,7 +406,7 @@ class ReciepsContextProvider extends Component {
           <PrivateRoute
             key={recipe.recipe.name}
             path={`/recipe/:recipeId`}
-            component={<RecipeFocus recipe={recipe} />}
+            component={<RecipeDetails recipe={recipe} />}
           />
         );
       });
@@ -493,12 +441,8 @@ class ReciepsContextProvider extends Component {
           handleKeyDown: this.handleKeyDown,
           selectSuggestion: this.selectSuggestion,
           searchRecipes: this.searchRecipes,
-          selectRecipe: this.selectRecipe,
           addRecipeToFavorites: this.addRecipeToFavorites,
           removeRecipeFromFavorites: this.removeRecipeFromFavorites,
-          showRecipeFocus: this.showRecipeFocus,
-          hideRecipeFocus: this.hideRecipeFocus,
-          setSelectedRecipe: this.setSelectedRecipe,
           toggleSaveRecipe: this.toggleSaveRecipe,
           setRecipeRoutes: this.setRecipeRoutes,
           clearSearchResults: this.clearSearchResults,

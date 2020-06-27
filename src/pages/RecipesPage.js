@@ -5,7 +5,6 @@ import IngredientSearch from "../components/recipes/IngredientSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Page from "./Page";
-import RecipeFocus from "../components/recipes/RecipeFocus";
 import { loader } from "../util/uiUtils";
 
 const RecipesPage = () => {
@@ -14,11 +13,6 @@ const RecipesPage = () => {
     searchRecipes,
     drawSearchedRecipes,
     recipeSearchResults,
-    recipeFocusVisible,
-    selectedRecipe,
-    showRecipeFocus,
-    hideRecipeFocus,
-    setSelectedRecipe,
     loading,
     clearSearchResults,
   } = useContext(RecipesContext);
@@ -39,57 +33,46 @@ const RecipesPage = () => {
 
   return (
     <React.Fragment>
-      {recipeFocusVisible ? (
-        <RecipeFocus recipe={selectedRecipe} hideHandler={hideRecipeFocus} />
-      ) : (
-        <Page>
-          <div className="grid-item ingerdients">
-            <div className="ingredient-container">
-              <h2 className="page-subheader">Ingredients</h2>
-              <IngredientSearch />
-              {selectedIngredients.length > 0 && (
-                <button
-                  className="btn btn-recipe-search"
-                  onClick={searchRecipes}
-                >
-                  Search Recipes&ensp;
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-              )}
-              <br />
-              {drawSelectedIngredients()}
-            </div>
+      <Page>
+        <div className="grid-item ingerdients">
+          <div className="ingredient-container">
+            <h2 className="page-subheader">Ingredients</h2>
+            <IngredientSearch />
+            {selectedIngredients.length > 0 && (
+              <button className="btn btn-recipe-search" onClick={searchRecipes}>
+                Search Recipes&ensp;
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            )}
+            <br />
+            {drawSelectedIngredients()}
           </div>
-          <div className="grid-item recipes">
-            <div className="card-container">
-              {loading ? (
-                loader
-              ) : (
-                <>
-                  {recipeSearchResults.length > 0 && (
-                    <React.Fragment>
-                      {/* <hr /> */}
-                      <br />
-                      <button
-                        className="btn btn-clear-results"
-                        onClick={clearSearchResults}
-                      >
-                        Clear Results
-                      </button>
-                      <br />
-                    </React.Fragment>
-                  )}
-                  {drawSearchedRecipes(
-                    recipeSearchResults,
-                    showRecipeFocus,
-                    setSelectedRecipe
-                  )}
-                </>
-              )}
-            </div>
+        </div>
+        <div className="grid-item recipes">
+          <div className="card-container">
+            {loading ? (
+              loader
+            ) : (
+              <>
+                {recipeSearchResults.length > 0 && (
+                  <React.Fragment>
+                    {/* <hr /> */}
+                    <br />
+                    <button
+                      className="btn btn-clear-results"
+                      onClick={clearSearchResults}
+                    >
+                      Clear Results
+                    </button>
+                    <br />
+                  </React.Fragment>
+                )}
+                {drawSearchedRecipes(recipeSearchResults, "RecipesPage")}
+              </>
+            )}
           </div>
-        </Page>
-      )}
+        </div>
+      </Page>
     </React.Fragment>
   );
 };

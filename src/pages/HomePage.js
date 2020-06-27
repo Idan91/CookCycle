@@ -5,7 +5,6 @@ import {
   faUtensils,
   faHeart,
   faShareSquare,
-  // faAngleDoubleDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const HomePage = () => {
@@ -55,8 +54,6 @@ const HomePage = () => {
         </div>
       </div>
       <div className="home-page-desc desc-join">
-        <br />
-        <br />
         <br />
         <br />
         <div className="centered-container">

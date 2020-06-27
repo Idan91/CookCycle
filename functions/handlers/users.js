@@ -2,9 +2,8 @@ const { db } = require("../util/admin");
 
 const config = require("../util/firebaseConfig");
 
-const axios = require("axios");
-
 const firebase = require("firebase");
+
 firebase.initializeApp(config);
 
 exports.signup = (req, res) => {
@@ -14,8 +13,6 @@ exports.signup = (req, res) => {
     confirmPassword: req.body.confirmPassword,
     username: req.body.username,
   };
-
-  // TODO - Validate data
 
   let token, userId;
 
