@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { UserContext } from "../contexts/UserContext";
 import { RecipesContext } from "../contexts/RecipesContext";
@@ -89,6 +89,24 @@ const UserPage = () => {
     return <div className="profile-content">{content}</div>;
   };
 
+  const profileBar = useRef(null);
+
+  useEffect(() => {
+    if (profileBar) {
+      if (profileBar.fireEvent) {
+        profileBar.fireEvent("onclick");
+      } else {
+        const evObj = document.createEvent("Events");
+        evObj.initEvent("click", true, false);
+        setTimeout(() => {
+          if (profileBar.dispathEvent) {
+            profileBar.dispathEvent(evObj);
+          }
+        }, 300);
+      }
+    }
+  }, []);
+
   return (
     <Page>
       <React.Fragment>
@@ -104,7 +122,9 @@ const UserPage = () => {
             />
             <br />
             <h2>{`${displayName}`}</h2>
-            <div className="user-profile-bar">{populateProfileFields()}</div>
+            <div ref={profileBar} className="user-profile-bar">
+              {populateProfileFields()}
+            </div>
             {renderProfileContent()}
           </React.Fragment>
         )}
